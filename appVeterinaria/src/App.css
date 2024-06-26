@@ -1,0 +1,27 @@
+:root {
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: black;
+  color: white;
+}
+
+.container {
+  max-width: 1280px;
+}
+
+.grid-container {
+  display: grid;
+  column-gap: 20px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+
+.lista-novo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bt-novo {
+  margin: 10px;
+  height: 46px;
+  font-size: 14px;
+}
