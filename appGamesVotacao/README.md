@@ -1,8 +1,30 @@
-# React + Vite
+# Projeto para atividade de Clean Code - Gerenciador de Games
+ 
+## 🔐 Pré requisitos
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<a href="https://vitejs.dev/">Vite</a> &nbsp;
+<a href="https://nodejs.org/en/">Node.js</a> &nbsp;
 
-Currently, two official plugins are available:
+## Instalação do projeto e dependências
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+npm i
+
+## Executando a aplicação
+
+```bash
+# development
+$ npm i
+$ npm run dev
+$ o + enter
+```
+
+## Pré-visualização do projeto
+
+<img width="600" alt="image" src="/public/preview2.png">
+
+## 🤝 Contribuídores
+
+<a href="https://github.com/TechGui"><img src="https://github.com/TechGui.png" width="45" height="45"></a> &nbsp;
+<a href="https://github.com/Gerson-Clara"><img src="https://github.com/Gerson-Clara.png" width="45" height="45"></a> &nbsp;
+<a href="https://github.com/Dollynski"><img src="https://github.com/Dollynski.png" width="45" height="45"></a> &nbsp;
+<a href="https://github.com/TonhaoIsrael"><img src="https://github.com/TonhaoIsrael.png" width="45" height="45"></a> &nbsp;
