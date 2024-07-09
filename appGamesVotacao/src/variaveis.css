@@ -13,7 +13,8 @@
     --cor-rotulo: black;
     --border-radius-padrao: 5px;
     --padding-botao: 8px;
-    --font-size-botao: 12px;
+    --margin-botao: 4px;
+    --font-size-botao: 13px;
     --font-weight-bold: bold;
     --font-size-small: small;
     --box-shadow: 0 0.3px 5px rgba(119, 119, 119, 0.979);

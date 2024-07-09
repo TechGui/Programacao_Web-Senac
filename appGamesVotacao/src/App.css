@@ -7,7 +7,7 @@
 }
 
 .container {
-  max-width: 1280px;
+  max-width: 1480px;
   display: grid;
   grid-template-columns: 1fr;
   margin: 0 auto;

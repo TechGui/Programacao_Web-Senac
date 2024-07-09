@@ -1,68 +1,97 @@
-import './ListaJogo.css';
+import React, { useEffect, useState } from 'react';
 import { FaCheck } from "react-icons/fa";
-import { toast } from 'sonner';
+import { toast } from 'sonner'; // Supondo que 'sonner' seja sua biblioteca de toast, ajuste conforme necessário
+import axios from 'axios';
+import './ListaJogo.css'; // Importe o CSS aqui se necessário
 
-function ListaJogo({ jogo, jogos, setJogos }) {
-  function avaliaJogo() {
-    const email = prompt(`Digite seu email aqui para votar em ${jogo.nome}:`);
-    if (!validaEmail(email)) {
-      toast.error("Email inválido ou ação cancelada!");
-      return;
-    }
+const API_URL = 'http://localhost:3000/jogos'; // Substitua pela sua URL correta
 
-    if (jogo.email.includes(email)) {
-      toast.error("Email já votou nesse jogo!");
-      return;
-    }
+const ListaJogo = () => {
+  const [jogos, setJogos] = useState([]);
 
-    const confirmacao = confirm(`Confirmar voto em ${jogo.nome}?`);
-    if (!confirmacao) {
-      toast.error(`Voto cancelado em ${jogo.nome}!`);
-      return;
-    }
-
-    const jogosAtualizados = jogos.map((j) => {
-      if (j.nome === jogo.nome) {
-        return {
-          ...j,
-          votoConfirmacao: 1,
-          voto: j.voto + 1,
-          email: [...j.email, email],
-        };
+  useEffect(() => {
+    const fetchJogos = async () => {
+      try {
+        const response = await axios.get(API_URL);
+        setJogos(response.data);
+      } catch (error) {
+        toast.error("Erro ao carregar jogos!");
+        console.error('Error fetching games:', error);
       }
-      return j;
-    });
+    };
 
-    setJogos(jogosAtualizados);
-    localStorage.setItem("jogos", JSON.stringify(jogosAtualizados));
-    toast.success(`Voto confirmado em ${jogo.nome}!`);
-  }
+    fetchJogos();
+  }, []);
 
-  function validaEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
+  const avaliaJogo = async (id) => {
+    const email = prompt("Digite seu e-mail para confirmar a avaliação:");
+    if (!email) {
+      toast.error("O e-mail é necessário para votar!");
+      return;
+    }
+
+    try {
+      const response = await axios.put(`${API_URL}/${id}/vote`, { email });
+      setJogos(jogos.map(j => j.id === id ? response.data : j));
+      toast.success(`Ok! Voto computado com sucesso para o jogo ${response.data.nome}!`);
+    } catch (error) {
+      toast.error("Erro ao computar o voto!");
+      console.error('Error voting for game:', error);
+    }
+  };
+
+  const verDetalhes = async (jogoId) => {
+    try {
+      const response = await axios.get(`${API_URL}/${jogoId}/emails`);
+      const emails = response.data.join(", ");
+      if (!emails) {
+        return alert("Nenhum email encontrado para este jogo.");
+      }
+      
+      alert(`Emails dos usuários que votaram: \n${emails}`);
+    } catch (error) {
+      if (error.response) {
+        toast.error('Erro ao obter detalhes dos emails.');
+        console.error('Erro inesperado:', error.message);
+      }
+    }
+  };
+
+  const apagaJogo = async (id) => {
+    try {
+      await axios.delete(`${API_URL}/${id}`);
+      setJogos(jogos.filter(j => j.id !== id));
+      toast.success('Jogo apagado com sucesso!');
+    } catch (error) {
+      toast.error('Erro ao apagar jogo!');
+      console.error('Error deleting game:', error);
+    }
+  };
 
   return (
-    <div className="grid-item">
-      <img src={jogo.foto} alt="jogo" className='foto'/>
-      <div className='lista_descricao'>
-        <h3>{jogo.nome}</h3>
-        <p className='desenvolvedora'>{jogo.desenvolvedora}</p>
-        <p className='genero'>{jogo.genero}</p>
-        <p className='anoLancamento'>Ano de Lançamento: {jogo.anoLancamento}</p>
-        <p><button onClick={avaliaJogo}>Votar em {jogo.nome} <FaCheck /></button></p>
-        {jogo.votoConfirmacao === 0 ?
-          <img src="./novo.png" alt="Novidade" className='novidade'/>
-          :
-          <div className='votacao_detalhes'>
-            <p className='botaoemai'><button className='botao_ver-emails' onClick={() => alert(`Emails que votaram em {jogo.nome}:\n${jogo.email.join(", ")}`)}>Ver detalhes...</button></p>
-            <p className='votos'>{jogo.voto} votos </p>
-          </div>  
-        }        
-      </div>
+    <div className="grid-container">
+      {jogos.map(jogo => (
+        <div key={jogo.id} className="card-jogo">
+          <img className='urlImagem' src={jogo.urlImagem} alt="Imagem do Jogo" />
+          <div className='lista_descricao'>
+            <h2>{jogo.nome}</h2>
+            <p>Desenvolvedora: {jogo.desenvolvedora}</p>
+            <p>Gênero: {jogo.genero}</p>
+            <p>Lançamento: {jogo.dataLancamento}</p>
+            <button onClick={() => avaliaJogo(jogo.id)}>Avaliar Jogo <FaCheck /></button>
+            {jogo.votoConfirmacao === 0 ?
+              <img src="./novo.png" alt="Novidade" className='novidade'/>
+              :
+              <div className='votacao_detalhes'>
+                <button className='botao_ver-emails' onClick={() => verDetalhes(jogo.id)}>Ver detalhes...</button>
+                <p className='votos'>{jogo.votos} votos </p>
+              </div>
+            }
+          </div>
+        </div>
+      ))}
     </div>
-  )
-}
+  );
+};
 
 export default ListaJogo;
