@@ -7,6 +7,7 @@ Este projeto foi desenvolvido por um grupo de 4 integrantes. Cada membro contrib
 ### Nova Funcionalidade
 
 Implementamos uma nova funcionalidade: um modal que lista o ranking dos jogos cadastrados. Esta funcionalidade permite aos usuários visualizar o ranking de forma clara e organizada, melhorando a experiência de uso da aplicação.
+Também integramos a aplicação com um banco de dados PostgreSQL e uma API local, tornando a aplicação mais eficiente e fácil de gerenciar.
 
 ## Boas Práticas de Clean Code
 
@@ -28,6 +29,12 @@ A aplicação está agora mais estável e eficaz, proporcionando uma experiênci
 
 #### Foi testado a partir de uma aplicação React.js. Pré-visualização do projeto rodando localmente com a nova funcionalidade implementada:
 <img width="940" alt="image" src="/appGamesVotacao/public/preview.png">
+
+#### Integração com Banco de Dados PostgreSQL
+<img width="440" alt="image" src="/appGamesVotacao/public/postgresql.png">
+
+#### Integração com API Localhost
+<img width="440" alt="image" src="/appGamesVotacao/public/api.png">
 
 
 Checklist:
