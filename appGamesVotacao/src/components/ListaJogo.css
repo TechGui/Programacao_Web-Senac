@@ -1,14 +1,7 @@
 @import '.././variaveis.css';
 
-.grid-item {
-  display: flex;
-  border: 2px solid var(--cor-cinza-escuro);
-  border-radius: var(--border-radius-padrao);
-  margin: 2px;
-}
-
 .card-jogo {
-  display: flex; /* Change to flex */
+  display: flex;
   border: 2px solid var(--cor-cinza-escuro);
   border-radius: var(--border-radius-padrao);
   margin: 10px;
@@ -16,9 +9,9 @@
 }
 
 .urlImagem {
-  width: 190px;
+  width: 210px;
   height: 240px;
-  margin-right: 20px;
+  margin-right: 14px;
   border-radius: var(--border-radius-padrao);
 }
 
@@ -26,16 +19,24 @@ h3 {
   margin: 0;
 }
 
-.genero {
+.jogo_nome {
+  font-size: var(--font-size-medium);
   font-weight: var(--font-weight-bold);
+  margin-top: 4px;
 }
 
-.anoLancamento {
+.jogo_genero {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-small);
+}
+
+.jogo_ano {
   font-size: var(--font-size-small);
 }
 
 .novidade {
-  width: 37px;
+  width: 43px;
+  margin-left: var(--margin-botao);
 }
 
 button {
@@ -73,12 +74,13 @@ button {
 
 .lista_descricao {
   display: flex;
-  flex-direction: column; /* Add this line */
-  padding: 4px;
+  flex-direction: column;
+  width: 100%;
+  padding: 6px;
 }
 
 .lista_descricao p {
-  margin: 4px 0;
+  margin: 6px 0;
 }
 
 .lista_descricao h2 {
@@ -96,7 +98,7 @@ button {
 }
 
 .excluirJogo {
-  width: 14px;
+  width: 9px;
   cursor: pointer;
-  margin-right: 40px;
+  align-self: flex-end;
 }

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { FaCheck } from "react-icons/fa";
-import { toast } from 'sonner'; // Supondo que 'sonner' seja sua biblioteca de toast, ajuste conforme necessário
+import { toast } from 'sonner';
 import axios from 'axios';
-import './ListaJogo.css'; // Importe o CSS aqui se necessário
+import './ListaJogo.css'; 
 
-const API_URL = 'http://localhost:3000/jogos'; // Substitua pela sua URL correta
+const API_URL = 'http://localhost:3000/jogos';
 
 const ListaJogo = () => {
   const [jogos, setJogos] = useState([]);
@@ -74,12 +74,14 @@ const ListaJogo = () => {
         <div key={jogo.id} className="card-jogo">
           <img className='urlImagem' src={jogo.urlImagem} alt="Imagem do Jogo" />
           <div className='lista_descricao'>
-            <h2>{jogo.nome}</h2>
-            <p>Desenvolvedora: {jogo.desenvolvedora}</p>
-            <p>Gênero: {jogo.genero}</p>
-            <p>Lançamento: {jogo.dataLancamento}</p>
+          <img className='excluirJogo' src="./excluir.png" alt="Botão para excluir um jogo" onClick={() => apagaJogo(jogo.id)} />
+
+            <h2 className='jogo_nome'>{jogo.nome}</h2>
+            <p>{jogo.desenvolvedora}</p>
+            <p className='jogo_genero'>{jogo.genero}</p>
+            <p className='jogo_ano'>Ano de Lançamento: {jogo.dataLancamento}</p>
             <button onClick={() => avaliaJogo(jogo.id)}>Avaliar Jogo <FaCheck /></button>
-            {jogo.votoConfirmacao === 0 ?
+            {jogo.votos === 0 ?
               <img src="./novo.png" alt="Novidade" className='novidade'/>
               :
               <div className='votacao_detalhes'>

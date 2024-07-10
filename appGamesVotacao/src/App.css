@@ -6,20 +6,20 @@
   color: var(--cor-branca);
 }
 
-.container {
-  max-width: 1480px;
-  display: grid;
-  grid-template-columns: 1fr;
-  margin: 0 auto;
-  padding: 10px;
-}
+  .container {
+    max-width: 1580px;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 0 auto;
+    padding: 10px;
+  }
 
 .grid-container {
   display: grid;
   column-gap: 10px;
-  grid-template-columns: auto auto auto;
-  padding: 10px;
+  grid-template-columns: 32% 32% 32%;
   margin-top: 20px;
+  justify-content: center;
 }
 
 .lista-novo {

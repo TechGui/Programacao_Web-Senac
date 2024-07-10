@@ -27,7 +27,7 @@ A aplicação está agora mais estável e eficaz, proporcionando uma experiênci
 ## Como foi testado?
 
 #### Foi testado a partir de uma aplicação React.js. Pré-visualização do projeto rodando localmente com a nova funcionalidade implementada:
-<img width="600" alt="image" src="/public/preview.png">
+<img width="600" alt="image" src="/appGamesVotacao/public/preview.png">
 
 
 Checklist:

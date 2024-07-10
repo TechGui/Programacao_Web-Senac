@@ -86,4 +86,15 @@ router.put('/:id/vote', async (req, res) => {
   }
 });
 
+// Rota para ordenar jogos por votos
+router.get('/ordenar/votos', async (req, res) => {
+  try {
+    const jogos = await prisma.jogo.findMany({ orderBy: { votos: 'desc' } });
+    res.json(jogos);
+  } catch (error) {
+    console.error('Erro ao listar jogos:', error);
+    res.status(500).json({ error: 'Erro ao listar jogos' });
+  }
+});
+
 export default router;

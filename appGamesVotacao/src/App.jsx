@@ -6,6 +6,9 @@ import './App.css';
 import 'react-responsive-modal/styles.css';
 import { Toaster } from "sonner";
 import { Modal } from 'react-responsive-modal';
+import axios from 'axios';
+
+const API_URL = 'http://localhost:3000/jogos';
 
 function App() {
   const [jogos, setJogos] = useState([]);
@@ -13,21 +16,24 @@ function App() {
   const [openRanking, setOpenRanking] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("jogos")) {
-      const jogos2 = JSON.parse(localStorage.getItem("jogos"));
-      setJogos(jogos2);
-    }
+    const fetchJogos = async () => {
+      try {
+        const response = await axios.get(API_URL);
+        setJogos(response.data);
+      } catch (error) {
+        console.error('Erro ao buscar jogos:', error);
+
+      }
+    };
+
+    fetchJogos();
   }, []);
 
   const ordenarJogosPorVotos = (jogos) => {
-    return jogos.sort((a, b) => b.voto - a.voto);
-  }
+    return jogos.sort((a, b) => b.votos - a.votos);
+  };
 
-  const listaJogos = ordenarJogosPorVotos(jogos).map(jogo => (
-    <ListaJogo key={jogo.nome} jogo={jogo} jogos={jogos} setJogos={setJogos} />
-  ));
-
-  const jogosOrdenados = [...jogos].sort((a, b) => b.voto - a.voto);
+  const jogosOrdenados = ordenarJogosPorVotos(jogos);
 
   return (
     <>
@@ -41,21 +47,18 @@ function App() {
         <Modal open={openNovoJogo} onClose={() => setOpenNovoJogo(false)} center>
           <NovoJogo jogos={jogos} setJogos={setJogos} />
         </Modal>
-        
     
         <Modal open={openRanking} onClose={() => setOpenRanking(false)} center>
-          <h2 className ="titulo-ranking">Ranking dos Jogos</h2>
+          <h2 className="titulo-ranking">Ranking dos Jogos</h2>
           <div className="ranking-container">
             {jogosOrdenados.map((jogo, index) => (
-              <div key={jogo.nome} className="ranking-item">
-                <span>{index + 1}. {jogo.nome} - {jogo.voto} votos</span>
+              <div key={jogo.id} className="ranking-item">
+                <span>{index + 1}. {jogo.nome} - {jogo.votos} votos</span> {}
               </div>
             ))}
           </div>
         </Modal>
-        <div className="grid-container">
-          {listaJogos}
-        </div>
+          <ListaJogo jogos={jogosOrdenados} setJogos={setJogos} />
       </div>
       <Toaster richColors position="top-right" />
     </>
@@ -63,3 +66,5 @@ function App() {
 }
 
 export default App;
+
+
