@@ -20,7 +20,7 @@ $ o + enter
 
 ## Pré-visualização do projeto
 
-<img width="740" alt="image" src="/appGamesVotacao/public/preview2.png">
+<img width="940" alt="image" src="/appGamesVotacao/public/preview2.png">
 
 ## 🤝 Contribuídores
 
